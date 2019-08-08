@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -9,7 +8,8 @@ public class ArrayStorage {
     int saveCount = 0;
 
     void clear() {
-
+        Arrays.fill(storage, 0, saveCount, null);
+        saveCount = 0;
     }
 
     void save(Resume r) {
@@ -18,11 +18,20 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        return null;
+        return storage[findElement(uuid)];
     }
 
     void delete(String uuid) {
 
+    }
+
+    private int findElement(String uuid) {
+        for (int i = 0; i < saveCount; i++) {
+            if (storage[i].equals(uuid)) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     /**
@@ -34,6 +43,6 @@ public class ArrayStorage {
     }
 
     int size() {
-        return 0;
+        return saveCount;
     }
 }
