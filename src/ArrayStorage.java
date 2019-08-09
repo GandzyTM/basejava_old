@@ -22,12 +22,12 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-
+        Arrays.fill(storage, findElement(uuid), findElement(uuid) + 1, null);
     }
 
     private int findElement(String uuid) {
         for (int i = 0; i < saveCount; i++) {
-            if (storage[i].equals(uuid)) {
+            if (String.valueOf(storage[i]).equals(uuid)) {
                 return i;
             }
         }
