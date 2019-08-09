@@ -15,7 +15,7 @@ public class ArrayStorage {
     Resume get(String uuid) {
         if (findElement(uuid) != -1) {
             return storage[findElement(uuid)];
-        } 
+        }
         return null;
     }
 
@@ -33,6 +33,7 @@ public class ArrayStorage {
 
     void delete(String uuid) {
         Arrays.fill(storage, findElement(uuid), findElement(uuid) + 1, null);
+        saveCount--;
     }
 
     void clear() {
@@ -47,7 +48,7 @@ public class ArrayStorage {
                     return i;
                 }
             }
-        } 
+        }
         return -1;
     }
 }
