@@ -13,7 +13,10 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        return storage[findElement(uuid)];
+        if (findElement(uuid) != -1) {
+            return storage[findElement(uuid)];
+        } 
+        return null;
     }
 
     int size() {
@@ -44,9 +47,7 @@ public class ArrayStorage {
                     return i;
                 }
             }
-        } else if (!Arrays.toString(Arrays.copyOf(storage, saveCount)).contains(uuid)){
-            System.out.println("Didn't find");
-        }
+        } 
         return -1;
     }
 }
