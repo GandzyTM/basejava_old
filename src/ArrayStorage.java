@@ -39,10 +39,15 @@ public class ArrayStorage {
 
     private int findElement(String uuid) {
         for (int i = 0; i < saveCount; i++) {
-            if (String.valueOf(storage[i]).equals(uuid)) {
-                return i;
+//            System.out.println(Arrays.toString(Arrays.copyOf(storage, saveCount)).contains(uuid));
+            if (Arrays.toString(Arrays.copyOf(storage, saveCount)).contains(uuid)) {
+                if (String.valueOf(storage[i]).equals(uuid)) {
+                    return i;
+                }
+            } else if (!Arrays.toString(Arrays.copyOf(storage, saveCount)).contains(uuid)){
+                System.out.println("Didn't find");
             }
         }
-        return 0;
+        return -1;
     }
 }
