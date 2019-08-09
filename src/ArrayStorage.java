@@ -7,11 +7,6 @@ public class ArrayStorage {
     Resume[] storage = new Resume[10000];
     int saveCount = 0;
 
-    void clear() {
-        Arrays.fill(storage, 0, saveCount, null);
-        saveCount = 0;
-    }
-
     void save(Resume r) {
         saveCount++;
         storage[saveCount - 1] = r;
@@ -21,17 +16,8 @@ public class ArrayStorage {
         return storage[findElement(uuid)];
     }
 
-    void delete(String uuid) {
-        Arrays.fill(storage, findElement(uuid), findElement(uuid) + 1, null);
-    }
-
-    private int findElement(String uuid) {
-        for (int i = 0; i < saveCount; i++) {
-            if (String.valueOf(storage[i]).equals(uuid)) {
-                return i;
-            }
-        }
-        return 0;
+    int size() {
+        return saveCount;
     }
 
     /**
@@ -42,7 +28,21 @@ public class ArrayStorage {
 //        return new Resume[0];
     }
 
-    int size() {
-        return saveCount;
+    void delete(String uuid) {
+        Arrays.fill(storage, findElement(uuid), findElement(uuid) + 1, null);
+    }
+
+    void clear() {
+        Arrays.fill(storage, 0, saveCount, null);
+        saveCount = 0;
+    }
+
+    private int findElement(String uuid) {
+        for (int i = 0; i < saveCount; i++) {
+            if (String.valueOf(storage[i]).equals(uuid)) {
+                return i;
+            }
+        }
+        return 0;
     }
 }
