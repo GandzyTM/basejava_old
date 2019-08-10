@@ -5,48 +5,50 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-    int saveCount = 0;
+    int incSize = 0;
 
     void save(Resume r) {
-        saveCount++;
-        storage[saveCount - 1] = r;
+        storage[incSize] = r;
+        incSize++;
     }
 
     Resume get(String uuid) {
-        if (findElement(uuid) != -1) {
-            return storage[findElement(uuid)];
+        int fe = findElement(uuid);
+        if (fe != -1) {
+            return storage[fe];
         }
         return null;
     }
 
     int size() {
-        return saveCount;
+        return incSize;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(storage, saveCount);
+        return Arrays.copyOf(storage, incSize);
 //        return new Resume[0];
     }
 
     void delete(String uuid) {
-        Arrays.fill(storage, findElement(uuid), findElement(uuid) + 1, null);
-        saveCount--;
+        for (int k = findElement(uuid); k < incSize - 1; k++) {
+            storage[k] = storage[k + 1];
+        }
+        incSize--;
     }
 
     void clear() {
-        Arrays.fill(storage, 0, saveCount, null);
-        saveCount = 0;
+        Arrays.fill(storage, 0, incSize, null);
+        incSize = 0;
     }
 
+    // поиск элемента в части массива Resume
     private int findElement(String uuid) {
-        if (Arrays.toString(Arrays.copyOf(storage, saveCount)).contains(uuid)) {
-            for (int i = 0; i < saveCount; i++) {
-                if (String.valueOf(storage[i]).equals(uuid)) {
-                    return i;
-                }
+        for (int i = 0; i < incSize; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                return i;
             }
         }
         return -1;
