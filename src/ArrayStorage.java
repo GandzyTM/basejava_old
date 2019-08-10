@@ -44,7 +44,6 @@ public class ArrayStorage {
         incSize = 0;
     }
 
-    // поиск элемента в части массива Resume
     private int findElement(String uuid) {
         for (int i = 0; i < incSize; i++) {
             if (storage[i].uuid.equals(uuid)) {
